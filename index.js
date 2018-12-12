@@ -67,7 +67,7 @@ function co(gen) {
     function onRejected(err) {
       var ret;
       try {
-        ret = gen.throw(err);
+        ret = gen.throw(err); //迭代器对象可以throw错误
       } catch (e) {
         return reject(e);
       }
@@ -159,15 +159,7 @@ function thunkToPromise(fn) {
   });
 }
 
-/**
- * Convert an array of "yieldables" to a promise.
- * Uses `Promise.all()` internally.
- *
- * @param {Array} obj
- * @return {Promise}
- * @api private
- */
-
+//将可以yieldable的数组转换为promise数组
 function arrayToPromise(obj) {
   return Promise.all(obj.map(toPromise, this));
 }
